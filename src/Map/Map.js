@@ -1,44 +1,38 @@
 import React from "react";
-import mapboxgl from "mapbox-gl";
+import { connect } from "react-redux";
+
+import Location from "../Components/Location";
+
+import { updateLngLat, updateZoom } from "../Store/Actions/Location";
+
+import { loadMap, onLoadConfig, onMoveConfig } from "./helper";
 
 import "./Map.css";
 
-export default class Map extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lng: -119.41,
-      lat: 36.77,
-      zoom: 5,
-    };
-  }
-
+class Map extends React.Component {
   componentDidMount() {
-    mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
-    const map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [this.state.lng, this.state.lat],
-      zoom: this.state.zoom,
-    });
+    const { updateCoords, updateZoom } = this.props;
+    const map = loadMap(this.mapContainer);
 
-    map.on("move", () => {
-      this.setState({
-        lng: map.getCenter().lng.toFixed(4),
-        lat: map.getCenter().lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2),
-      });
-    });
+    onLoadConfig(map);
+    onMoveConfig(map, updateCoords, updateZoom);
   }
 
   render() {
     return (
       <div>
-        <div>
-          <div className="sidebarStyle">{`${this.state.lng} : ${this.state.lat}`}</div>
-        </div>
+        <Location />
         <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
       </div>
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateCoords: (lng, lat) => dispatch(updateLngLat(lng, lat)),
+    updateZoom: (zoom) => dispatch(updateZoom(zoom)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Map);
