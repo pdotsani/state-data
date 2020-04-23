@@ -1,0 +1,20 @@
+.menu {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 12px;
+  background-color: #9e9e9e;
+  color: #ffffff;
+  z-index: 1 !important;
+  padding: 6px;
+  font-weight: bold;
+}
+
+.menu_selection {
+  display: flex;
+}
+
+.menu_selection_label {
+  margin-right: 5px;
+}

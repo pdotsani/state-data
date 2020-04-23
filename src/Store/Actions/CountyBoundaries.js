@@ -1,2 +1,8 @@
-export const COUNTY_BOUNDARIES_ON = "COUNTY_BOUNDARIES_ON";
-export const COUNTY_BOUNDARIES_OFF = "COUNTY_BOUNDARIES_OFF";
+export const COUNTY_BOUNDARIES_TOGGLE = "COUNTY_BOUNDARIES_TOGGLE";
+
+export function countyBoundariesToggle(toggle) {
+  return {
+    toggle: !toggle,
+    type: COUNTY_BOUNDARIES_TOGGLE,
+  };
+}

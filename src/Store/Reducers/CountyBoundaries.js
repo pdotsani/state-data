@@ -1,19 +1,12 @@
-import {
-  COUNTY_BOUNDARIES_ON,
-  COUNTY_BOUNDARIES_OFF,
-} from "../Actions/CountyBoundaries";
+import { COUNTY_BOUNDARIES_TOGGLE } from "../Actions/CountyBoundaries";
 
-export default function CountyBoundaries(state = { toggle: false }, action) {
+export default function CountyBoundaries(state = { toggle: true }, action) {
   switch (action.type) {
-    case COUNTY_BOUNDARIES_ON:
+    case COUNTY_BOUNDARIES_TOGGLE:
+      const { toggle } = action;
       return {
         ...state,
-        toggle: true,
-      };
-    case COUNTY_BOUNDARIES_OFF:
-      return {
-        ...state,
-        toggle: false,
+        toggle,
       };
     default:
       return state;

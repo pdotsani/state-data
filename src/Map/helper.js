@@ -20,7 +20,7 @@ export function onLoadConfig(map) {
   map.on("load", () => {
     map.addSource("caCounties", {
       type: "vector",
-      url: "mapbox://pdotsani.0dauuj0t",
+      url: process.env.REACT_APP_CA_COUNTIES_URL,
     });
 
     map.addLayer({
@@ -44,4 +44,12 @@ export function onMoveConfig(map, updateCoords, updateZoom) {
     updateCoords(lng, lat);
     updateZoom(zoom);
   });
+}
+
+export function toggleCAMapBoundaries(map, isToggleBoundaries) {
+  if (isToggleBoundaries) {
+    map.setLayoutProperty("ca-county-boundaries", "visibility", "none");
+  } else {
+    map.setLayoutProperty("ca-county-boundaries", "visibility", "visible");
+  }
 }
