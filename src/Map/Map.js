@@ -19,16 +19,16 @@ import "./Map.css";
 class Map extends React.Component {
   componentDidMount() {
     const { updateCoords, updateZoom } = this.props;
-    this.mapAPI = loadMap(this.mapContainer);
+    this.map = loadMap(this.mapContainer);
 
-    onLoadConfig(this.mapAPI);
-    onMoveConfig(this.mapAPI, updateCoords, updateZoom);
+    onLoadConfig(this.map);
+    onMoveConfig(this.map, updateCoords, updateZoom);
   }
 
   toggleCABoundaries = () => {
     const { toggleBoundaries, isToggleBoundaries } = this.props;
     toggleBoundaries(isToggleBoundaries);
-    toggleCAMapBoundaries(this.mapAPI, isToggleBoundaries);
+    toggleCAMapBoundaries(this.map, isToggleBoundaries);
   };
 
   render() {
